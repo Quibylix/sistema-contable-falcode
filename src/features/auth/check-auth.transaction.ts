@@ -1,8 +1,8 @@
 export async function checkAuthTransaction() {
-  try {
-    const s = JSON.parse(localStorage.getItem("session") ?? "{}");
-    return s?.token === "tok_demo" && s?.user === "admin";
-  } catch {
-    throw new Error("No session found");
+  const s = JSON.parse(localStorage.getItem("session") ?? "");
+  if (s.token !== "tok_demo" || s.user !== "admin") {
+    throw new Error("Invalid session");
   }
+
+  return;
 }
