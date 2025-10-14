@@ -5,14 +5,18 @@ import "@mantine/dates/styles.css";
 import { Route, Routes } from "react-router";
 import HomePage from "./pages/home";
 import { MantineProvider } from "@mantine/core";
+import AccountsPage from "./pages/accounts";
 import { AppShell } from "./features/ui/app-shell/app-shell.component";
+import { Notifications } from "@mantine/notifications";
 
 export default function App() {
   return (
     <MantineProvider>
+      <Notifications />
       <Routes>
         <Route element={<AppShell />}>
           <Route index element={<HomePage />} />
+          <Route path="/accounts" element={<AccountsPage />} />
         </Route>
       </Routes>
     </MantineProvider>
