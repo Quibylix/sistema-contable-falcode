@@ -1,7 +1,10 @@
+import { Route, Routes } from "react-router";
+import HomePage from "./pages/home";
+
 export default function App() {
   return (
-    <div>
-      <h1>Falcode</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+    </Routes>
   );
 }
