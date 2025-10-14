@@ -15,23 +15,26 @@ export default function HomePage() {
   }, []);
 
   return (
-    <Container size="xs">
-      <Image
-        src="/falcode.jpeg"
-        radius="md"
-        alt="Logo Falcode"
-        w={150}
-        mb="md"
-        mt="xl"
-        mx="auto"
-      />
-      <Title order={1} ta="center" mt="md" mb="xl">
-        Sistema Contable para Falcode
-      </Title>
-      <LoginForm />
-      <Text mt={10} ta="center">
-        Usuario demo: <b>admin</b> / Contraseña: <b>1234</b>
-      </Text>
-    </Container>
+    <>
+      <title>Login | Sistema Contable Falcode</title>
+      <Container size="xs">
+        <Image
+          src="/falcode.jpeg"
+          radius="md"
+          alt="Logo Falcode"
+          w={150}
+          mb="md"
+          mt="xl"
+          mx="auto"
+        />
+        <Title order={1} ta="center" mt="md" mb="xl">
+          Sistema Contable para Falcode
+        </Title>
+        <LoginForm />
+        <Text mt={10} ta="center">
+          Usuario demo: <b>admin</b> / Contraseña: <b>1234</b>
+        </Text>
+      </Container>
+    </>
   );
 }
