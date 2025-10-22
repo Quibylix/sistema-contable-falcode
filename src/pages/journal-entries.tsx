@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { checkAuthTransaction } from "../features/auth/check-auth.transaction";
 import { RegisterJournalEntryForm } from "../features/journal-entries/register-journal-entry/register-journal-entry-form.component";
 import { Modal } from "@mantine/core";
+import JournalEntriesList from "../features/journal-entries/journal-entries-list/journal-entries-list.component";
 
 export default function JournalEntriesPage() {
   const [modalOpened, setModalOpened] = useState(false);
@@ -39,6 +40,7 @@ export default function JournalEntriesPage() {
         <Title order={1} mt="md" mb="xl">
           Transacciones
         </Title>
+        <JournalEntriesList />
       </Container>
     </>
   );
