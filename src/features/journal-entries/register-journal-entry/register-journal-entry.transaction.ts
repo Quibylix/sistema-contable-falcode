@@ -9,7 +9,7 @@ type EntryDetail = {
   credit: number;
 };
 
-const periodsSchema = z.array(
+export const periodsSchema = z.array(
   z.object({
     name: z.string(),
     isAdjustmentPeriod: z.boolean(),
@@ -32,7 +32,7 @@ const periodsSchema = z.array(
   }),
 );
 
-async function getPeriodsTransaction() {
+export async function getPeriodsTransaction() {
   await checkAuthTransaction();
 
   let periods: z.infer<typeof periodsSchema>;
