@@ -21,7 +21,7 @@ export function AppShell() {
       .then(() => {
         setLinks([
           { label: "Cuentas", href: "/accounts" },
-          { label: "Registrar Transacción", href: "/journal-entries" },
+          { label: "Transacciones", href: "/journal-entries" },
         ]);
       })
       .catch(() => {
