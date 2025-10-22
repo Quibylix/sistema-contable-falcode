@@ -19,7 +19,10 @@ export function AppShell() {
   useEffect(() => {
     checkAuthTransaction()
       .then(() => {
-        setLinks([{ label: "Cuentas", href: "/accounts" }]);
+        setLinks([
+          { label: "Cuentas", href: "/accounts" },
+          { label: "Registrar Transacción", href: "/journal-entries" },
+        ]);
       })
       .catch(() => {
         setLinks([{ label: "Login", href: "/" }]);

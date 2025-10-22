@@ -8,6 +8,7 @@ import { MantineProvider } from "@mantine/core";
 import AccountsPage from "./pages/accounts";
 import { AppShell } from "./features/ui/app-shell/app-shell.component";
 import { Notifications } from "@mantine/notifications";
+import JournalEntriesPage from "./pages/journal-entries";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route element={<AppShell />}>
           <Route index element={<HomePage />} />
           <Route path="/accounts" element={<AccountsPage />} />
+          <Route path="/journal-entries" element={<JournalEntriesPage />} />
         </Route>
       </Routes>
     </MantineProvider>
