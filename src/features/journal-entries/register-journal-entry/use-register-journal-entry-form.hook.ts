@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { getAccountsTransaction } from "../../accounts/account-list/get-accounts.transaction";
+import { registerJournalEntry } from "./register-journal-entry.transaction";
 
 type AccountDetail = {
   id: string;
@@ -14,6 +15,7 @@ type EntryDetail = {
 };
 
 type ReducerAction =
+  | { type: "clear-entries" }
   | { type: "new-entry"; entryId: number }
   | { type: "delete-entry"; entryId: number }
   | { type: "update-debit"; entryId: number; debit: number }
@@ -26,6 +28,11 @@ type ReducerAction =
 
 function reducer(state: EntryDetail[], action: ReducerAction) {
   switch (action.type) {
+    case "clear-entries":
+      return [
+        { id: 0, accountId: null, debit: 0, credit: 0 },
+        { id: 1, accountId: null, debit: 0, credit: 0 },
+      ];
     case "new-entry":
       return [
         ...state,
@@ -123,7 +130,7 @@ export function useRegisterJournalEntryForm() {
     setDescription(value);
   }
 
-  function submitHandler(e: React.FormEvent<HTMLFormElement>) {
+  async function submitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (description.trim() === "") {
@@ -159,6 +166,16 @@ export function useRegisterJournalEntryForm() {
       );
       return;
     }
+
+    try {
+      await registerJournalEntry({ description, entries });
+    } catch (error) {
+      console.error("Error registering journal entry:", error);
+      return;
+    }
+
+    setDescription("");
+    dispatch({ type: "clear-entries" });
   }
 
   return {
