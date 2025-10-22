@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { getAccountsTransaction } from "../../accounts/account-list/get-accounts.transaction";
 import { registerJournalEntry } from "./register-journal-entry.transaction";
+import { useNavigate } from "react-router";
+import { notifications } from "@mantine/notifications";
 
 type AccountDetail = {
   id: string;
@@ -75,6 +77,7 @@ export function useRegisterJournalEntryForm() {
   const [description, setDescription] = useState("");
   const [accounts, setAccounts] = useState<AccountDetail[]>([]);
   const nextEntryId = useRef(2);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAccountsTransaction().then(({ accounts }) => {
@@ -174,8 +177,13 @@ export function useRegisterJournalEntryForm() {
       return;
     }
 
-    setDescription("");
-    dispatch({ type: "clear-entries" });
+    notifications.show({
+      title: "Transacción actualizada",
+      message: "Transacción añadida correctamente",
+      color: "green",
+      autoClose: 1200,
+    });
+    setTimeout(() => navigate(0), 2000);
   }
 
   return {
