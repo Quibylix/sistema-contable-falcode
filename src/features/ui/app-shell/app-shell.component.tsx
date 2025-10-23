@@ -10,8 +10,10 @@ import {
 import { useEffect, useState } from "react";
 import { checkAuthTransaction } from "../../auth/check-auth.transaction";
 import { Outlet } from "react-router";
+import { ChangePeriodStatus } from "../../periods/period-status/change-period-status.component";
 
 export function AppShell() {
+  const [authenticated, setAuthenticated] = useState(false);
   const [links, setLinks] = useState<{ label: string; href: string }[]>([]);
 
   const [opened, { toggle }] = useDisclosure();
@@ -19,6 +21,7 @@ export function AppShell() {
   useEffect(() => {
     checkAuthTransaction()
       .then(() => {
+        setAuthenticated(true);
         setLinks([
           { label: "Cuentas", href: "/accounts" },
           { label: "Transacciones", href: "/journal-entries" },
@@ -26,6 +29,7 @@ export function AppShell() {
         ]);
       })
       .catch(() => {
+        setAuthenticated(false);
         setLinks([{ label: "Login", href: "/" }]);
       });
   }, []);
@@ -56,6 +60,7 @@ export function AppShell() {
                 </Anchor>
               ))}
             </Group>
+            {authenticated && <ChangePeriodStatus />}
           </Group>
         </Group>
       </MantineAppShell.Header>
@@ -71,6 +76,7 @@ export function AppShell() {
             {link.label}
           </Anchor>
         ))}
+        {authenticated && <ChangePeriodStatus />}
       </MantineAppShell.Navbar>
 
       <MantineAppShell.Main>
