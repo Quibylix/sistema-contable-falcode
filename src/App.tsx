@@ -9,6 +9,7 @@ import AccountsPage from "./pages/accounts";
 import { AppShell } from "./features/ui/app-shell/app-shell.component";
 import { Notifications } from "@mantine/notifications";
 import JournalEntriesPage from "./pages/journal-entries";
+import LedgerPage from "./pages/ledger";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route index element={<HomePage />} />
           <Route path="/accounts" element={<AccountsPage />} />
           <Route path="/journal-entries" element={<JournalEntriesPage />} />
+          <Route path="/ledger" element={<LedgerPage />} />
         </Route>
       </Routes>
     </MantineProvider>

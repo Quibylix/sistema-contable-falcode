@@ -22,6 +22,7 @@ export function AppShell() {
         setLinks([
           { label: "Cuentas", href: "/accounts" },
           { label: "Transacciones", href: "/journal-entries" },
+          { label: "Libro mayor", href: "/ledger" },
         ]);
       })
       .catch(() => {
