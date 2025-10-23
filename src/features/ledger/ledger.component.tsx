@@ -14,6 +14,10 @@ import {
   TableThead,
   TableTr,
   TableTh,
+  TableTbody,
+  TableTd,
+  TableTfoot,
+  Checkbox,
 } from "@mantine/core";
 import type { Account } from "../accounts/account-list/account-list.component";
 import { getAccountsTransaction } from "../accounts/account-list/get-accounts.transaction";
@@ -24,6 +28,7 @@ export function Ledger() {
     null,
   );
   const [accountData, setAccountData] = useState<Account[]>([]);
+  const [displayAllAccounts, setDisplayAllAccounts] = useState(false);
 
   useEffect(() => {
     getAccountsTransaction()
@@ -84,24 +89,118 @@ export function Ledger() {
         {periods[selectedPeriodIndex].name}
         {periods[selectedPeriodIndex].endDate === null ? "" : " (Cerrado)"}
       </Title>
+      <Container fluid my="lg">
+        <Checkbox
+          label="Mostrar solo cuentas con movimientos"
+          checked={!displayAllAccounts}
+          onChange={(event) =>
+            setDisplayAllAccounts(!event.currentTarget.checked)
+          }
+        />
+      </Container>
       <SimpleGrid
         cols={{ base: 1, sm: 2, lg: 3 }}
         spacing={{ base: 10, sm: "xl" }}
         verticalSpacing={{ base: "md", sm: "xl" }}
       >
-        {accountData.map((account) => (
-          <Container key={account.id}>
-            <Title order={3}>{account.name}</Title>
-            <Table>
-              <TableThead>
-                <TableTr>
-                  <TableTh>Deber</TableTh>
-                  <TableTh>Haber</TableTh>
-                </TableTr>
-              </TableThead>
-            </Table>
-          </Container>
-        ))}
+        {accountData
+          .filter((account) => {
+            if (displayAllAccounts) return true;
+            return entries.some(({ detail }) =>
+              detail.some((d) => d.accountId === account.id),
+            );
+          })
+          .map((account) => (
+            <Container w="100%" fluid key={account.id}>
+              <Title lineClamp={1} order={3} title={account.name}>
+                {account.name}
+              </Title>
+              <Table>
+                <TableThead>
+                  <TableTr>
+                    <TableTh>Identificador</TableTh>
+                    <TableTh>Deber</TableTh>
+                    <TableTh>Haber</TableTh>
+                  </TableTr>
+                </TableThead>
+                <TableTbody>
+                  {entries
+                    .map(({ detail }, index) =>
+                      detail
+                        .filter((d) => d.accountId === account.id)
+                        .map((d) => (
+                          <TableTr key={d.id}>
+                            <TableTd>
+                              {index === 0 ? "i)" : index + ")"}
+                            </TableTd>
+                            <TableTd>{d.debit.toFixed(2)}</TableTd>
+                            <TableTd>{d.credit.toFixed(2)}</TableTd>
+                          </TableTr>
+                        )),
+                    )
+                    .flat()}
+                  <TableTr fw="bold">
+                    <TableTd>Total</TableTd>
+                    <TableTd>
+                      {entries
+                        .flatMap(({ detail }) =>
+                          detail.filter((d) => d.accountId === account.id),
+                        )
+                        .reduce((sum, d) => sum + d.debit, 0)
+                        .toFixed(2)}
+                    </TableTd>
+                    <TableTd>
+                      {entries
+                        .flatMap(({ detail }) =>
+                          detail.filter((d) => d.accountId === account.id),
+                        )
+                        .reduce((sum, d) => sum + d.credit, 0)
+                        .toFixed(2)}
+                    </TableTd>
+                  </TableTr>
+                </TableTbody>
+                <TableTfoot>
+                  <TableTr fw="bold" fs="italic">
+                    <TableTd>Saldo</TableTd>
+                    <TableTd>
+                      {(() => {
+                        const totalDebit = entries
+                          .flatMap(({ detail }) =>
+                            detail.filter((d) => d.accountId === account.id),
+                          )
+                          .reduce((sum, d) => sum + d.debit, 0);
+                        const totalCredit = entries
+                          .flatMap(({ detail }) =>
+                            detail.filter((d) => d.accountId === account.id),
+                          )
+                          .reduce((sum, d) => sum + d.credit, 0);
+                        return totalDebit > totalCredit
+                          ? (totalDebit - totalCredit).toFixed(2)
+                          : "";
+                      })()}
+                    </TableTd>
+                    <TableTd>
+                      {(() => {
+                        const totalDebit = entries
+                          .flatMap(({ detail }) =>
+                            detail.filter((d) => d.accountId === account.id),
+                          )
+                          .reduce((sum, d) => sum + d.debit, 0);
+                        const totalCredit = entries
+                          .flatMap(({ detail }) =>
+                            detail.filter((d) => d.accountId === account.id),
+                          )
+                          .reduce((sum, d) => sum + d.credit, 0);
+                        return totalCredit > totalDebit
+                          ? (totalCredit - totalDebit).toFixed(2)
+                          : "";
+                      })()}
+                    </TableTd>
+                  </TableTr>
+                </TableTfoot>
+              </Table>
+            </Container>
+          ))}
       </SimpleGrid>
     </Container>
   );
