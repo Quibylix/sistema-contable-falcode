@@ -3,7 +3,7 @@ import { IconTrash } from "@tabler/icons-react";
 import { memo } from "react";
 
 export type RegisterJournalEntryFormEntryProps = {
-  id: number;
+  id: string;
   accountId: string | null;
   debit: number;
   credit: number;
@@ -11,10 +11,10 @@ export type RegisterJournalEntryFormEntryProps = {
     id: string;
     name: string;
   }[];
-  updateAccount: (id: number, accountId: string | null) => void;
-  updateDebit: (id: number, debit: number) => void;
-  updateCredit: (id: number, credit: number) => void;
-  deleteEntry: (id: number) => void;
+  updateAccount: (id: string, accountId: string | null) => void;
+  updateDebit: (id: string, debit: number) => void;
+  updateCredit: (id: string, credit: number) => void;
+  deleteEntry: (id: string) => void;
 };
 
 export const RegisterJournalEntryFormEntry = memo(

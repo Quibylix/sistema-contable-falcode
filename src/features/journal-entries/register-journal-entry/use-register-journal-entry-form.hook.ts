@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import { getAccountsTransaction } from "../../accounts/account-list/get-accounts.transaction";
 import { registerJournalEntry } from "./register-journal-entry.transaction";
 import { useNavigate } from "react-router";
@@ -10,7 +10,7 @@ type AccountDetail = {
 };
 
 type EntryDetail = {
-  id: number;
+  id: string;
   accountId: string | null;
   debit: number;
   credit: number;
@@ -18,13 +18,13 @@ type EntryDetail = {
 
 type ReducerAction =
   | { type: "clear-entries" }
-  | { type: "new-entry"; entryId: number }
-  | { type: "delete-entry"; entryId: number }
-  | { type: "update-debit"; entryId: number; debit: number }
-  | { type: "update-credit"; entryId: number; credit: number }
+  | { type: "new-entry"; entryId: string }
+  | { type: "delete-entry"; entryId: string }
+  | { type: "update-debit"; entryId: string; debit: number }
+  | { type: "update-credit"; entryId: string; credit: number }
   | {
       type: "update-account";
-      entryId: number;
+      entryId: string;
       accountId: string | null;
     };
 
@@ -32,8 +32,8 @@ function reducer(state: EntryDetail[], action: ReducerAction) {
   switch (action.type) {
     case "clear-entries":
       return [
-        { id: 0, accountId: null, debit: 0, credit: 0 },
-        { id: 1, accountId: null, debit: 0, credit: 0 },
+        { id: crypto.randomUUID(), accountId: null, debit: 0, credit: 0 },
+        { id: crypto.randomUUID(), accountId: null, debit: 0, credit: 0 },
       ];
     case "new-entry":
       return [
@@ -71,12 +71,11 @@ function reducer(state: EntryDetail[], action: ReducerAction) {
 
 export function useRegisterJournalEntryForm() {
   const [entries, dispatch] = useReducer(reducer, [
-    { id: 0, accountId: null, debit: 0, credit: 0 },
-    { id: 1, accountId: null, debit: 0, credit: 0 },
+    { id: crypto.randomUUID(), accountId: null, debit: 0, credit: 0 },
+    { id: crypto.randomUUID(), accountId: null, debit: 0, credit: 0 },
   ]);
   const [description, setDescription] = useState("");
   const [accounts, setAccounts] = useState<AccountDetail[]>([]);
-  const nextEntryId = useRef(2);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -107,23 +106,23 @@ export function useRegisterJournalEntryForm() {
   }, []);
 
   const insertNewEntry = useCallback(() => {
-    dispatch({ type: "new-entry", entryId: nextEntryId.current++ });
+    dispatch({ type: "new-entry", entryId: crypto.randomUUID() });
   }, []);
 
-  const deleteEntry = useCallback((entryId: number) => {
+  const deleteEntry = useCallback((entryId: string) => {
     dispatch({ type: "delete-entry", entryId });
   }, []);
 
-  const updateDebit = useCallback((entryId: number, debit: number) => {
+  const updateDebit = useCallback((entryId: string, debit: number) => {
     dispatch({ type: "update-debit", entryId, debit });
   }, []);
 
-  const updateCredit = useCallback((entryId: number, credit: number) => {
+  const updateCredit = useCallback((entryId: string, credit: number) => {
     dispatch({ type: "update-credit", entryId, credit });
   }, []);
 
   const updateAccount = useCallback(
-    (entryId: number, accountId: string | null) => {
+    (entryId: string, accountId: string | null) => {
       dispatch({ type: "update-account", entryId, accountId });
     },
     [],

@@ -3,7 +3,7 @@ import { checkAuthTransaction } from "../../auth/check-auth.transaction";
 import defaultPeriods from "../periods.json";
 
 type EntryDetail = {
-  id: number;
+  id: string;
   accountId: string | null;
   debit: number;
   credit: number;
@@ -22,6 +22,7 @@ export const periodsSchema = z.array(
         description: z.string(),
         detail: z.array(
           z.object({
+            id: z.string(),
             accountId: z.string().nullable(),
             debit: z.number().nonnegative(),
             credit: z.number().nonnegative(),
@@ -70,6 +71,7 @@ export async function registerJournalEntry({
     detail: entries
       .filter(({ debit, credit }) => debit > 0 || credit > 0)
       .map(({ accountId, debit, credit }) => ({
+        id: crypto.randomUUID(),
         accountId,
         debit,
         credit,
