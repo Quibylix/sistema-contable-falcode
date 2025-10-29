@@ -11,6 +11,7 @@ import { Notifications } from "@mantine/notifications";
 import JournalEntriesPage from "./pages/journal-entries";
 import LedgerPage from "./pages/ledger";
 import IncomeStatementPage from "./pages/income-statement";
+import CostsPage from "./pages/costs";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/journal-entries" element={<JournalEntriesPage />} />
           <Route path="/ledger" element={<LedgerPage />} />
           <Route path="/income-statement" element={<IncomeStatementPage />} />
+          <Route path="/costs" element={<CostsPage />} />
         </Route>
       </Routes>
     </MantineProvider>
