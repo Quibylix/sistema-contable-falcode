@@ -26,6 +26,8 @@ export function AppShell() {
           { label: "Cuentas", href: "/accounts" },
           { label: "Transacciones", href: "/journal-entries" },
           { label: "Libro mayor", href: "/ledger" },
+          { label: "Estado de Resultados", href: "/income-statement" },
+          { label: "Calcular Costos", href: "/costs" },
         ]);
       })
       .catch(() => {
