@@ -15,6 +15,53 @@ export const periodsSchema = z.array(
     isAdjustmentPeriod: z.boolean(),
     startDate: z.iso.datetime(),
     endDate: z.iso.datetime().nullable(),
+    incomeStatement: z
+      .object({
+        salesAccounts: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            balance: z.number(),
+          }),
+        ),
+        totalSales: z.number(),
+        salesCostAccounts: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            balance: z.number(),
+          }),
+        ),
+        totalSalesCost: z.number(),
+        grossProfit: z.number(),
+        operatingExpensesAccounts: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            balance: z.number(),
+          }),
+        ),
+        totalOperatingExpenses: z.number(),
+        operatingProfit: z.number(),
+        financialExpensesAccounts: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            balance: z.number(),
+          }),
+        ),
+        totalFinancialExpenses: z.number(),
+        otherIncomeAccounts: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            balance: z.number(),
+          }),
+        ),
+        totalOtherIncome: z.number(),
+        netProfit: z.number(),
+      })
+      .optional(),
     entries: z.array(
       z.object({
         isAdjustment: z.boolean().optional(),
