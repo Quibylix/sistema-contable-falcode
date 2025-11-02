@@ -15,6 +15,25 @@ export const periodsSchema = z.array(
     isAdjustmentPeriod: z.boolean(),
     startDate: z.iso.datetime(),
     endDate: z.iso.datetime().nullable(),
+    statementOfChangesInEquity: z
+      .object({
+        beginningCapitalSocial: z.number(),
+        beginningUtilidadRetenida: z.number(),
+        beginningReservasLegales: z.number(),
+        beginningUtilidadEjercicio: z.number(),
+        beginningTotalEquity: z.number(),
+        reservaLegalAmount: z.number(),
+        utilidadRetenidaMovement: z.number(),
+        currentPeriodProfit: z.number(),
+        endingCapitalSocial: z.number(),
+        endingUtilidadRetenida: z.number(),
+        endingReservasLegales: z.number(),
+        endingUtilidadEjercicio: z.number(),
+        endingTotalEquity: z.number(),
+        maxReservasLegales: z.number(),
+        reservasLegalesPercentage: z.number(),
+      })
+      .optional(),
     incomeStatement: z
       .object({
         salesAccounts: z.array(
@@ -88,7 +107,8 @@ export async function getPeriodsTransaction() {
     periods = periodsSchema.parse(
       JSON.parse(localStorage.getItem("periods") || "null"),
     );
-  } catch {
+  } catch (e) {
+    console.error(e);
     localStorage.setItem("periods", JSON.stringify(defaultPeriods));
     periods = defaultPeriods;
   }

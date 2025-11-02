@@ -6,6 +6,7 @@ import {
 } from "../../journal-entries/register-journal-entry/register-journal-entry.transaction";
 import type { Account } from "../../accounts/account-list/account-list.component";
 import { getAccountsTransaction } from "../../accounts/account-list/get-accounts.transaction";
+import { getStatementOfChangesInEquityData } from "./get-statement-of-change-in-equity-data";
 
 export async function changePeriodStatus(newPeriodName?: string) {
   await checkAuthTransaction();
@@ -42,18 +43,29 @@ export async function changePeriodStatus(newPeriodName?: string) {
       );
     });
 
-    activePeriod.endDate = new Date().toISOString();
-
     const incomeStatementData = getIncomeStatementData(activePeriod, accounts);
     activePeriod.incomeStatement = incomeStatementData;
 
-    periods.push({
+    const statementsOfChangesInEquity = getStatementOfChangesInEquityData(
+      activePeriod,
+      accounts,
+      incomeStatementData.netProfit,
+    );
+    activePeriod.statementOfChangesInEquity = statementsOfChangesInEquity;
+
+    activePeriod.endDate = new Date().toISOString();
+
+    const newPeriod = {
       name: newPeriodName,
       startDate: new Date().toISOString(),
       endDate: null,
       isAdjustmentPeriod: false,
       entries: [],
-    });
+    };
+
+    makeInitialEntry(newPeriod, activePeriod);
+
+    periods.push(newPeriod);
   }
 
   localStorage.setItem("periods", JSON.stringify(periods));
@@ -240,4 +252,34 @@ function getIncomeStatementData(
     totalOtherIncome,
     netProfit,
   };
+}
+
+function makeInitialEntry(
+  period: z.infer<typeof periodsSchema>[number],
+  lastPeriod?: z.infer<typeof periodsSchema>[number],
+) {
+  const entry = {
+    date: new Date().toISOString(),
+    description: "Asiento Inicial",
+    detail: [] as {
+      id: string;
+      accountId: string;
+      debit: number;
+      credit: number;
+    }[],
+    isAdjustment: false,
+  };
+
+  if (!lastPeriod) {
+    entry.detail.push({
+      id: crypto.randomUUID(),
+      accountId: "3.1.01",
+      debit: 0,
+      credit: 0,
+    });
+    period.entries.push(entry);
+    return;
+  }
+
+  period.entries.push(entry);
 }

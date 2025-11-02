@@ -27,6 +27,10 @@ export function AppShell() {
           { label: "Transacciones", href: "/journal-entries" },
           { label: "Libro mayor", href: "/ledger" },
           { label: "Estado de Resultados", href: "/income-statement" },
+          {
+            label: "Estado de Cambios en el Patrimonio",
+            href: "/statement-of-changes-in-equity",
+          },
           { label: "Calcular Costos", href: "/costs" },
         ]);
       })

@@ -97,6 +97,11 @@
         "type": "other"
       },
       "3.1.03": {
+        "name": "Reservas Legales",
+        "enabled": true,
+        "type": "other"
+      },
+      "3.1.04": {
         "name": "Utilidad del Ejercicio",
         "enabled": true,
         "type": "other"
@@ -137,6 +142,16 @@
       },
       "5.1.03": {
         "name": "Licencias de Terceros Usadas en Proyectos",
+        "enabled": true,
+        "type": "expense"
+      },
+      "5.1.04": {
+        "name": "Salarios de Desarrollo Reales",
+        "enabled": true,
+        "type": "expense"
+      },
+      "5.1.05": {
+        "name": "Costos Indirectos de Fabricación Reales",
         "enabled": true,
         "type": "expense"
       }
