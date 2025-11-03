@@ -12,6 +12,7 @@ import JournalEntriesPage from "./pages/journal-entries";
 import LedgerPage from "./pages/ledger";
 import IncomeStatementPage from "./pages/income-statement";
 import CostsPage from "./pages/costs";
+import BalanceSheetPage from "./pages/balance-sheet";
 import StatementOfChangesInEquityPage from "./pages/statement-of-changes-in-equity";
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
             path="/statement-of-changes-in-equity"
             element={<StatementOfChangesInEquityPage />}
           />
+          <Route path="/balance-sheet" element={<BalanceSheetPage />} />
           <Route path="/costs" element={<CostsPage />} />
         </Route>
       </Routes>

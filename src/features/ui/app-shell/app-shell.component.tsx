@@ -26,6 +26,7 @@ export function AppShell() {
           { label: "Cuentas", href: "/accounts" },
           { label: "Transacciones", href: "/journal-entries" },
           { label: "Libro mayor", href: "/ledger" },
+          { label: "Balance General", href: "/balance-sheet" },
           { label: "Estado de Resultados", href: "/income-statement" },
           {
             label: "Estado de Cambios en el Patrimonio",

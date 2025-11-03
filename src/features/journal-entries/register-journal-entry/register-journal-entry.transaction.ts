@@ -15,6 +15,54 @@ export const periodsSchema = z.array(
     isAdjustmentPeriod: z.boolean(),
     startDate: z.iso.datetime(),
     endDate: z.iso.datetime().nullable(),
+    balanceSheet: z
+      .object({
+        currentAssetAccounts: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            balance: z.number(),
+          }),
+        ),
+        totalCurrentAssets: z.number(),
+        nonCurrentAssetAccounts: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            balance: z.number(),
+          }),
+        ),
+        totalNonCurrentAssets: z.number(),
+        totalAssets: z.number(),
+        currentLiabilityAccounts: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            balance: z.number(),
+          }),
+        ),
+        totalCurrentLiabilities: z.number(),
+        nonCurrentLiabilityAccounts: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            balance: z.number(),
+          }),
+        ),
+        totalNonCurrentLiabilities: z.number(),
+        totalLiabilities: z.number(),
+        equityAccounts: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            balance: z.number(),
+          }),
+        ),
+        totalEquity: z.number(),
+        totalLiabilitiesEquity: z.number(),
+        difference: z.number(),
+      })
+      .optional(),
     statementOfChangesInEquity: z
       .object({
         beginningCapitalSocial: z.number(),

@@ -7,6 +7,7 @@ import {
 import type { Account } from "../../accounts/account-list/account-list.component";
 import { getAccountsTransaction } from "../../accounts/account-list/get-accounts.transaction";
 import { getStatementOfChangesInEquityData } from "./get-statement-of-change-in-equity-data";
+import { getBalanceSheet } from "./get-balance-sheet";
 
 export async function changePeriodStatus(newPeriodName?: string) {
   await checkAuthTransaction();
@@ -52,6 +53,15 @@ export async function changePeriodStatus(newPeriodName?: string) {
       incomeStatementData.netProfit,
     );
     activePeriod.statementOfChangesInEquity = statementsOfChangesInEquity;
+
+    const balanceSheet = getBalanceSheet(accounts, activePeriod.entries);
+    activePeriod.balanceSheet = balanceSheet;
+
+    if (balanceSheet.difference !== 0) {
+      throw new Error(
+        `El balance general no cuadra. Diferencia: ${balanceSheet.difference}`,
+      );
+    }
 
     activePeriod.endDate = new Date().toISOString();
 
@@ -270,7 +280,7 @@ function makeInitialEntry(
     isAdjustment: false,
   };
 
-  if (!lastPeriod) {
+  if (!lastPeriod || !lastPeriod.balanceSheet) {
     entry.detail.push({
       id: crypto.randomUUID(),
       accountId: "3.1.01",
@@ -280,6 +290,41 @@ function makeInitialEntry(
     period.entries.push(entry);
     return;
   }
+
+  const balanceSheet = lastPeriod.balanceSheet;
+  const {
+    currentAssetAccounts,
+    nonCurrentAssetAccounts,
+    currentLiabilityAccounts,
+    nonCurrentLiabilityAccounts,
+    equityAccounts,
+  } = balanceSheet;
+
+  [...currentAssetAccounts, ...nonCurrentAssetAccounts].forEach((acc) => {
+    if (acc.balance > 0) {
+      entry.detail.push({
+        id: crypto.randomUUID(),
+        accountId: acc.id,
+        debit: acc.balance,
+        credit: 0,
+      });
+    }
+  });
+
+  [
+    ...currentLiabilityAccounts,
+    ...nonCurrentLiabilityAccounts,
+    ...equityAccounts,
+  ].forEach((acc) => {
+    if (acc.balance > 0) {
+      entry.detail.push({
+        id: crypto.randomUUID(),
+        accountId: acc.id,
+        debit: 0,
+        credit: acc.balance,
+      });
+    }
+  });
 
   period.entries.push(entry);
 }
