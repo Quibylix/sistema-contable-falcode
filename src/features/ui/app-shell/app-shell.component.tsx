@@ -47,28 +47,14 @@ export function AppShell() {
       navbar={{
         width: 300,
         breakpoint: "sm",
-        collapsed: { desktop: true, mobile: !opened },
+        collapsed: { desktop: !opened, mobile: !opened },
       }}
       padding="md"
     >
       <MantineAppShell.Header>
         <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+          <Burger opened={opened} onClick={toggle} size="sm" />
           <Image src="/falcode.jpeg" alt="Logo Falcode" w={45} radius="md" />
-          <Group>
-            <Group ml={50} gap={5} className={classes.links} visibleFrom="sm">
-              {links.map((link) => (
-                <Anchor
-                  key={link.label}
-                  className={classes.link}
-                  href={link.href}
-                >
-                  {link.label}
-                </Anchor>
-              ))}
-            </Group>
-            {authenticated && <ChangePeriodStatus />}
-          </Group>
         </Group>
       </MantineAppShell.Header>
 

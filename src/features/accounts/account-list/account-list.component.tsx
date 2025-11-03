@@ -1,6 +1,7 @@
 import {
   Button,
   Container,
+  Paper,
   Table,
   TableTbody,
   TableTd,
@@ -101,44 +102,48 @@ export function AccountList() {
       <Title order={2} mb="lg">
         Listado de Cuentas
       </Title>
-      <Table stickyHeader>
-        <TableThead>
-          <TableTr>
-            <TableTh>Id</TableTh>
-            <TableTh>Nombre</TableTh>
-            <TableTh ta="center">Categoria</TableTh>
-            <TableTh ta="center">Estado</TableTh>
-            <TableTh ta="center">Acciones</TableTh>
-          </TableTr>
-        </TableThead>
-        <TableTbody>
-          {accountData.map((account) => (
-            <TableTr key={account.id}>
-              <TableTd>{account.id}</TableTd>
-              <TableTd>{account.name}</TableTd>
-              <TableTd ta="center">{account.category}</TableTd>
-              <TableTd ta="center">
-                <Text
-                  fz="inherit"
-                  component="span"
-                  c={account.enabled ? "green" : "red"}
-                >
-                  {account.enabled ? "Habilitada" : "Deshabilitada"}
-                </Text>
-              </TableTd>
-              <TableTd ta="center">
-                <Button
-                  onClick={getClickHandler(account.id, account.enabled)}
-                  variant="subtle"
-                  size="xs"
-                >
-                  {account.enabled ? "Deshabilitar" : "Habilitar"}
-                </Button>
-              </TableTd>
-            </TableTr>
-          ))}
-        </TableTbody>
-      </Table>
+      <Paper shadow="sm" withBorder p="md">
+        <Container fluid style={{ overflowX: "auto" }}>
+          <Table striped highlightOnHover stickyHeader>
+            <TableThead>
+              <TableTr>
+                <TableTh>Id</TableTh>
+                <TableTh>Nombre</TableTh>
+                <TableTh ta="center">Categoria</TableTh>
+                <TableTh ta="center">Estado</TableTh>
+                <TableTh ta="center">Acciones</TableTh>
+              </TableTr>
+            </TableThead>
+            <TableTbody>
+              {accountData.map((account) => (
+                <TableTr key={account.id}>
+                  <TableTd>{account.id}</TableTd>
+                  <TableTd>{account.name}</TableTd>
+                  <TableTd ta="center">{account.category}</TableTd>
+                  <TableTd ta="center">
+                    <Text
+                      fz="inherit"
+                      component="span"
+                      c={account.enabled ? "green" : "red"}
+                    >
+                      {account.enabled ? "Habilitada" : "Deshabilitada"}
+                    </Text>
+                  </TableTd>
+                  <TableTd ta="center">
+                    <Button
+                      onClick={getClickHandler(account.id, account.enabled)}
+                      variant="subtle"
+                      size="xs"
+                    >
+                      {account.enabled ? "Deshabilitar" : "Habilitar"}
+                    </Button>
+                  </TableTd>
+                </TableTr>
+              ))}
+            </TableTbody>
+          </Table>
+        </Container>
+      </Paper>
     </Container>
   );
 }

@@ -145,127 +145,129 @@ export function StatementOfChangeInEquity() {
       </Container>
 
       <Container fluid my="lg">
-        <Paper shadow="sm" p="md" withBorder>
-          <Table striped highlightOnHover>
-            <TableThead>
-              <TableTr>
-                <TableTh>Concepto</TableTh>
-                <TableTh ta="right">Capital Social</TableTh>
-                <TableTh ta="right">Reservas Legales</TableTh>
-                <TableTh ta="right">Utilidades Retenidas</TableTh>
-                <TableTh ta="right">Utilidad del Ejercicio</TableTh>
-                <TableTh ta="right">Total Patrimonio</TableTh>
-              </TableTr>
-            </TableThead>
-            <TableTbody>
-              {/* SALDOS INICIALES */}
-              <TableTr>
-                <TableTd fw="bold" bg="blue.0">
-                  SALDOS INICIALES
-                </TableTd>
-                <TableTd ta="right" bg="blue.0">
-                  {formatCurrency(beginningCapitalSocial)}
-                </TableTd>
-                <TableTd ta="right" bg="blue.0">
-                  {formatCurrency(beginningReservasLegales)}
-                </TableTd>
-                <TableTd ta="right" bg="blue.0">
-                  {formatCurrency(beginningUtilidadRetenida)}
-                </TableTd>
-                <TableTd ta="right" bg="blue.0">
-                  {formatCurrency(beginningUtilidadEjercicio)}
-                </TableTd>
-                <TableTd ta="right" bg="blue.0" fw="bold">
-                  {formatCurrency(beginningTotalEquity)}
-                </TableTd>
-              </TableTr>
-              <TableTr>
-                <TableTd fw="bold" pt="md" colSpan={6} bg="gray.1">
-                  MOVIMIENTOS DEL PERÍODO
-                </TableTd>
-              </TableTr>
-              {beginningUtilidadEjercicio > 0 && (
-                <>
-                  <TableTr>
-                    <TableTd pl="xl" fs="italic">
-                      Aplicación Reserva Legal (5% mínimo)
-                    </TableTd>
-                    <TableTd ta="right">-</TableTd>
-                    <TableTd
-                      ta="right"
-                      c={reservaLegalAmount > 0 ? "green" : undefined}
-                    >
-                      {reservaLegalAmount > 0
-                        ? formatCurrency(reservaLegalAmount)
-                        : "-"}
-                    </TableTd>
-                    <TableTd ta="right">-</TableTd>
-                    <TableTd ta="right" c="red">
-                      ({formatCurrency(reservaLegalAmount)})
-                    </TableTd>
-                    <TableTd ta="right">-</TableTd>
-                  </TableTr>
+        <Paper shadow="sm" withBorder p="md">
+          <Container fluid style={{ overflowX: "auto" }} maw="100%">
+            <Table striped highlightOnHover>
+              <TableThead>
+                <TableTr>
+                  <TableTh>Concepto</TableTh>
+                  <TableTh ta="right">Capital Social</TableTh>
+                  <TableTh ta="right">Reservas Legales</TableTh>
+                  <TableTh ta="right">Utilidades Retenidas</TableTh>
+                  <TableTh ta="right">Utilidad del Ejercicio</TableTh>
+                  <TableTh ta="right">Total Patrimonio</TableTh>
+                </TableTr>
+              </TableThead>
+              <TableTbody>
+                {/* SALDOS INICIALES */}
+                <TableTr>
+                  <TableTd fw="bold" bg="blue.0">
+                    SALDOS INICIALES
+                  </TableTd>
+                  <TableTd ta="right" bg="blue.0">
+                    {formatCurrency(beginningCapitalSocial)}
+                  </TableTd>
+                  <TableTd ta="right" bg="blue.0">
+                    {formatCurrency(beginningReservasLegales)}
+                  </TableTd>
+                  <TableTd ta="right" bg="blue.0">
+                    {formatCurrency(beginningUtilidadRetenida)}
+                  </TableTd>
+                  <TableTd ta="right" bg="blue.0">
+                    {formatCurrency(beginningUtilidadEjercicio)}
+                  </TableTd>
+                  <TableTd ta="right" bg="blue.0" fw="bold">
+                    {formatCurrency(beginningTotalEquity)}
+                  </TableTd>
+                </TableTr>
+                <TableTr>
+                  <TableTd fw="bold" pt="md" colSpan={6} bg="gray.1">
+                    MOVIMIENTOS DEL PERÍODO
+                  </TableTd>
+                </TableTr>
+                {beginningUtilidadEjercicio > 0 && (
+                  <>
+                    <TableTr>
+                      <TableTd pl="xl" fs="italic">
+                        Aplicación Reserva Legal (5% mínimo)
+                      </TableTd>
+                      <TableTd ta="right">-</TableTd>
+                      <TableTd
+                        ta="right"
+                        c={reservaLegalAmount > 0 ? "green" : undefined}
+                      >
+                        {reservaLegalAmount > 0
+                          ? formatCurrency(reservaLegalAmount)
+                          : "-"}
+                      </TableTd>
+                      <TableTd ta="right">-</TableTd>
+                      <TableTd ta="right" c="red">
+                        ({formatCurrency(reservaLegalAmount)})
+                      </TableTd>
+                      <TableTd ta="right">-</TableTd>
+                    </TableTr>
 
-                  <TableTr>
-                    <TableTd pl="xl" fs="italic">
-                      Traspaso a Utilidades Retenidas
-                    </TableTd>
-                    <TableTd ta="right">-</TableTd>
-                    <TableTd ta="right">-</TableTd>
-                    <TableTd ta="right" c="green">
-                      {formatCurrency(utilidadRetenidaMovement)}
-                    </TableTd>
-                    <TableTd ta="right" c="red">
-                      ({formatCurrency(utilidadRetenidaMovement)})
-                    </TableTd>
-                    <TableTd ta="right">-</TableTd>
-                  </TableTr>
-                </>
-              )}
-              <TableTr>
-                <TableTd pl="xl" fs="italic">
-                  Resultado del Ejercicio
-                </TableTd>
-                <TableTd ta="right">-</TableTd>
-                <TableTd ta="right">-</TableTd>
-                <TableTd ta="right">-</TableTd>
-                <TableTd
-                  ta="right"
-                  c={currentPeriodProfit >= 0 ? "green" : "red"}
-                  fw={600}
-                >
-                  {formatCurrency(currentPeriodProfit)}
-                </TableTd>
-                <TableTd
-                  ta="right"
-                  fw={600}
-                  c={currentPeriodProfit >= 0 ? "green" : "red"}
-                >
-                  {formatCurrency(currentPeriodProfit)}
-                </TableTd>
-              </TableTr>
-              <TableTr>
-                <TableTd fw="bold" pt="md" bg="green.0">
-                  SALDOS FINALES
-                </TableTd>
-                <TableTd ta="right" bg="green.0" fw="bold">
-                  {formatCurrency(endingCapitalSocial)}
-                </TableTd>
-                <TableTd ta="right" bg="green.0" fw="bold">
-                  {formatCurrency(endingReservasLegales)}
-                </TableTd>
-                <TableTd ta="right" bg="green.0" fw="bold">
-                  {formatCurrency(endingUtilidadRetenida)}
-                </TableTd>
-                <TableTd ta="right" bg="green.0" fw="bold">
-                  {formatCurrency(endingUtilidadEjercicio)}
-                </TableTd>
-                <TableTd ta="right" bg="green.0" fw="bold" fz="lg">
-                  {formatCurrency(endingTotalEquity)}
-                </TableTd>
-              </TableTr>
-            </TableTbody>
-          </Table>
+                    <TableTr>
+                      <TableTd pl="xl" fs="italic">
+                        Traspaso a Utilidades Retenidas
+                      </TableTd>
+                      <TableTd ta="right">-</TableTd>
+                      <TableTd ta="right">-</TableTd>
+                      <TableTd ta="right" c="green">
+                        {formatCurrency(utilidadRetenidaMovement)}
+                      </TableTd>
+                      <TableTd ta="right" c="red">
+                        ({formatCurrency(utilidadRetenidaMovement)})
+                      </TableTd>
+                      <TableTd ta="right">-</TableTd>
+                    </TableTr>
+                  </>
+                )}
+                <TableTr>
+                  <TableTd pl="xl" fs="italic">
+                    Resultado del Ejercicio
+                  </TableTd>
+                  <TableTd ta="right">-</TableTd>
+                  <TableTd ta="right">-</TableTd>
+                  <TableTd ta="right">-</TableTd>
+                  <TableTd
+                    ta="right"
+                    c={currentPeriodProfit >= 0 ? "green" : "red"}
+                    fw={600}
+                  >
+                    {formatCurrency(currentPeriodProfit)}
+                  </TableTd>
+                  <TableTd
+                    ta="right"
+                    fw={600}
+                    c={currentPeriodProfit >= 0 ? "green" : "red"}
+                  >
+                    {formatCurrency(currentPeriodProfit)}
+                  </TableTd>
+                </TableTr>
+                <TableTr>
+                  <TableTd fw="bold" pt="md" bg="green.0">
+                    SALDOS FINALES
+                  </TableTd>
+                  <TableTd ta="right" bg="green.0" fw="bold">
+                    {formatCurrency(endingCapitalSocial)}
+                  </TableTd>
+                  <TableTd ta="right" bg="green.0" fw="bold">
+                    {formatCurrency(endingReservasLegales)}
+                  </TableTd>
+                  <TableTd ta="right" bg="green.0" fw="bold">
+                    {formatCurrency(endingUtilidadRetenida)}
+                  </TableTd>
+                  <TableTd ta="right" bg="green.0" fw="bold">
+                    {formatCurrency(endingUtilidadEjercicio)}
+                  </TableTd>
+                  <TableTd ta="right" bg="green.0" fw="bold" fz="lg">
+                    {formatCurrency(endingTotalEquity)}
+                  </TableTd>
+                </TableTr>
+              </TableTbody>
+            </Table>
+          </Container>
         </Paper>
         <Paper shadow="xs" p="md" mt="lg" bg="blue.0" withBorder>
           <Title order={5} mb="sm">
