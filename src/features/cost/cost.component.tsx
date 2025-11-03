@@ -60,13 +60,13 @@ const ProjectCostCalculator = () => {
   // Cálculo de tarifa por hora según normativa salvadoreña
   const calcularTarifaPorHora = useMemo(() => {
     // Datos base
-    const diasLaboralesAnio = 365 - 52 - diasVacaciones;
+    const diasLaboralesAnio = 365 - 52 * 2 - diasVacaciones;
     const horasLaboralesDia = 8;
     const horasMensuales = (diasLaboralesAnio / 12) * horasLaboralesDia;
 
     // Prestaciones laborales (El Salvador)
     const aguinaldo = salarioMensual / 12;
-    const vacaciones = (salarioMensual / 30) * (diasVacaciones / 12);
+    const vacaciones = (salarioMensual / 30) * (diasVacaciones / 12) * 1.3;
     const isssPatronal = salarioMensual * 0.075;
     const afpPatronal = salarioMensual * 0.0875;
 
@@ -271,8 +271,11 @@ const ProjectCostCalculator = () => {
                       </Text>
                     </Group>
 
-                    <Group justify="space-between">
-                      <Text size="xs">Vacaciones ({diasVacaciones} días):</Text>
+                    <Group justify="space-between" wrap="nowrap">
+                      <Text size="xs">
+                        Vacaciones ({diasVacaciones} días + 30% del salario
+                        base):
+                      </Text>
                       <Text size="xs" fw={500}>
                         {formatCurrency(calcularTarifaPorHora.vacaciones)}
                       </Text>
