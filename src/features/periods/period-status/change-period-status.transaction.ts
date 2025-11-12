@@ -57,12 +57,6 @@ export async function changePeriodStatus(newPeriodName?: string) {
     const balanceSheet = getBalanceSheet(accounts, activePeriod.entries);
     activePeriod.balanceSheet = balanceSheet;
 
-    if (balanceSheet.difference !== 0) {
-      throw new Error(
-        `El balance general no cuadra. Diferencia: ${balanceSheet.difference}`,
-      );
-    }
-
     activePeriod.endDate = new Date().toISOString();
 
     const newPeriod = {
