@@ -13,19 +13,13 @@
         "enabled": true,
         "type": "other"
       },
-      "1.1.05": { "name": "Alquiler", "enabled": true, "type": "other" },
-      "1.1.06": {
-        "name": "Equipo de Oficina",
-        "enabled": true,
-        "type": "other"
-      },
-      "1.1.07": {
-        "name": "Desarrollo de Software en Curso",
-        "enabled": true,
-        "type": "other"
-      },
-      "1.1.08": {
+      "1.1.05": {
         "name": "Crédito Fiscal - IVA",
+        "enabled": true,
+        "type": "other"
+      },
+      "1.1.06": {
+        "name": "Desarrollo de Software en Curso",
         "enabled": true,
         "type": "other"
       }
@@ -37,12 +31,22 @@
         "type": "other"
       },
       "1.2.02": {
-        "name": "Amortización Acumulada",
+        "name": "Equipo de Oficina",
         "enabled": true,
         "type": "other"
       },
       "1.2.03": {
         "name": "Licencias de Software",
+        "enabled": true,
+        "type": "other"
+      },
+      "1.2.04": {
+        "name": "Activos Intangibles - Software Propio",
+        "enabled": true,
+        "type": "other"
+      },
+      "1.2.05": {
+        "name": "Amortización Acumulada",
         "enabled": true,
         "type": "other"
       }
@@ -61,11 +65,16 @@
         "type": "other"
       },
       "2.1.03": {
-        "name": "Débito Fiscal - IVA",
+        "name": "Retenciones por Pagar",
         "enabled": true,
         "type": "other"
       },
       "2.1.04": {
+        "name": "Débito Fiscal - IVA",
+        "enabled": true,
+        "type": "other"
+      },
+      "2.1.05": {
         "name": "Acreedores Diversos",
         "enabled": true,
         "type": "other"
@@ -73,7 +82,7 @@
     },
     "Pasivo No Corriente": {
       "2.2.01": {
-        "name": "Préstamo Bancario",
+        "name": "Préstamos Bancarios",
         "enabled": true,
         "type": "other"
       }
@@ -82,25 +91,44 @@
   "Patrimonio": {
     "Patrimonio": {
       "3.1.01": { "name": "Capital Social", "enabled": true, "type": "other" },
-      "3.1.02": { "name": "Utilidad Bruta", "enabled": true, "type": "other" }
+      "3.1.02": {
+        "name": "Utilidad Retenida",
+        "enabled": true,
+        "type": "other"
+      },
+      "3.1.03": {
+        "name": "Reservas Legales",
+        "enabled": true,
+        "type": "other"
+      },
+      "3.1.04": {
+        "name": "Utilidad del Ejercicio",
+        "enabled": true,
+        "type": "other"
+      }
     }
   },
   "Ingresos": {
     "Ingresos": {
       "4.1.01": {
-        "name": "Ingresos por Desarrollo de Software",
+        "name": "Ingresos por Desarrollo de Software a Medida",
         "enabled": true,
         "type": "income"
       },
       "4.1.02": {
-        "name": "Ingresos por Mantenimiento",
+        "name": "Ingresos por Mantenimiento y Soporte",
         "enabled": true,
         "type": "income"
       },
-      "4.1.03": { "name": "Otros Ingresos", "enabled": true, "type": "income" }
+      "4.1.03": {
+        "name": "Ingresos por Consultoría",
+        "enabled": true,
+        "type": "income"
+      },
+      "4.1.04": { "name": "Otros Ingresos", "enabled": true, "type": "income" }
     }
   },
-  "Costos y Gastos": {
+  "Costos y gastos": {
     "Costos de Servicios": {
       "5.1.01": {
         "name": "Costo de Desarrollo de Software",
@@ -129,26 +157,50 @@
       "5.2.01": { "name": "Salarios", "enabled": true, "type": "expense" },
       "5.2.02": { "name": "Vacaciones", "enabled": true, "type": "expense" },
       "5.2.03": { "name": "Aguinaldos", "enabled": true, "type": "expense" },
-      "5.2.04": { "name": "Seguro Social", "enabled": true, "type": "expense" },
+      "5.2.04": {
+        "name": "Seguridad Social (ISSS)",
+        "enabled": true,
+        "type": "expense"
+      },
       "5.2.05": {
-        "name": "Fondo de Pensiones",
+        "name": "Fondo de Pensiones (AFP)",
+        "enabled": true,
+        "type": "expense"
+      },
+      "5.2.06": {
+        "name": "Honorarios Profesionales",
+        "enabled": true,
+        "type": "expense"
+      },
+      "5.2.07": {
+        "name": "Gastos de Capacitación y Formación",
+        "enabled": true,
+        "type": "expense"
+      },
+      "5.2.08": {
+        "name": "Papelería y Útiles de Oficina",
         "enabled": true,
         "type": "expense"
       }
     },
     "Gastos de Mantenimiento": {
       "5.3.01": {
-        "name": "Mantenimiento de Equipo",
+        "name": "Mantenimiento de Equipo de Oficina",
         "enabled": true,
         "type": "expense"
       },
       "5.3.02": {
-        "name": "Otros Gastos de Mantenimiento",
+        "name": "Mantenimiento de Equipos de Cómputo",
+        "enabled": true,
+        "type": "expense"
+      },
+      "5.3.03": {
+        "name": "Otros Gastos por Mantenimiento",
         "enabled": true,
         "type": "expense"
       }
     },
-    "Gastos por Servicios Públicos": {
+    "Gastos por Servicios Públicos y Privados": {
       "5.4.01": {
         "name": "Servicio de Agua",
         "enabled": true,
@@ -165,12 +217,34 @@
         "type": "expense"
       },
       "5.4.04": {
-        "name": "Servicio de Internet",
+        "name": "Servicio de Internet/Cable",
         "enabled": true,
         "type": "expense"
       },
       "5.4.05": {
+        "name": "Servicios en la Nube (Hosting, API, etc.)",
+        "enabled": true,
+        "type": "expense"
+      },
+      "5.4.06": {
+        "name": "Servicio de Vigilancia",
+        "enabled": true,
+        "type": "expense"
+      },
+      "5.4.07": {
         "name": "Publicidad y Promoción",
+        "enabled": true,
+        "type": "expense"
+      }
+    },
+    "Gastos Financieros y Amortización": {
+      "5.5.01": {
+        "name": "Intereses Bancarios",
+        "enabled": true,
+        "type": "expense"
+      },
+      "5.5.02": {
+        "name": "Depreciación y Amortización",
         "enabled": true,
         "type": "expense"
       }
