@@ -13,13 +13,19 @@
         "enabled": true,
         "type": "other"
       },
-      "1.1.05": {
-        "name": "Crédito Fiscal - IVA",
+      "1.1.05": { "name": "Alquiler", "enabled": true, "type": "other" },
+      "1.1.06": {
+        "name": "Equipo de Oficina",
         "enabled": true,
         "type": "other"
       },
-      "1.1.06": {
+      "1.1.07": {
         "name": "Desarrollo de Software en Curso",
+        "enabled": true,
+        "type": "other"
+      },
+      "1.1.08": {
+        "name": "Crédito Fiscal - IVA",
         "enabled": true,
         "type": "other"
       }
@@ -31,22 +37,12 @@
         "type": "other"
       },
       "1.2.02": {
-        "name": "Equipo de Oficina",
+        "name": "Amortización Acumulada",
         "enabled": true,
         "type": "other"
       },
       "1.2.03": {
         "name": "Licencias de Software",
-        "enabled": true,
-        "type": "other"
-      },
-      "1.2.04": {
-        "name": "Activos Intangibles - Software Propio",
-        "enabled": true,
-        "type": "other"
-      },
-      "1.2.05": {
-        "name": "Amortización Acumulada",
         "enabled": true,
         "type": "other"
       }
@@ -65,16 +61,11 @@
         "type": "other"
       },
       "2.1.03": {
-        "name": "Retenciones por Pagar",
-        "enabled": true,
-        "type": "other"
-      },
-      "2.1.04": {
         "name": "Débito Fiscal - IVA",
         "enabled": true,
         "type": "other"
       },
-      "2.1.05": {
+      "2.1.04": {
         "name": "Acreedores Diversos",
         "enabled": true,
         "type": "other"
@@ -82,7 +73,7 @@
     },
     "Pasivo No Corriente": {
       "2.2.01": {
-        "name": "Préstamos Bancarios",
+        "name": "Préstamo Bancario",
         "enabled": true,
         "type": "other"
       }
@@ -91,44 +82,25 @@
   "Patrimonio": {
     "Patrimonio": {
       "3.1.01": { "name": "Capital Social", "enabled": true, "type": "other" },
-      "3.1.02": {
-        "name": "Utilidad Retenida",
-        "enabled": true,
-        "type": "other"
-      },
-      "3.1.03": {
-        "name": "Reservas Legales",
-        "enabled": true,
-        "type": "other"
-      },
-      "3.1.04": {
-        "name": "Utilidad del Ejercicio",
-        "enabled": true,
-        "type": "other"
-      }
+      "3.1.02": { "name": "Utilidad Bruta", "enabled": true, "type": "other" }
     }
   },
   "Ingresos": {
     "Ingresos": {
       "4.1.01": {
-        "name": "Ingresos por Desarrollo de Software a Medida",
+        "name": "Ingresos por Desarrollo de Software",
         "enabled": true,
         "type": "income"
       },
       "4.1.02": {
-        "name": "Ingresos por Mantenimiento y Soporte",
+        "name": "Ingresos por Mantenimiento",
         "enabled": true,
         "type": "income"
       },
-      "4.1.03": {
-        "name": "Ingresos por Consultoría",
-        "enabled": true,
-        "type": "income"
-      },
-      "4.1.04": { "name": "Otros Ingresos", "enabled": true, "type": "income" }
+      "4.1.03": { "name": "Otros Ingresos", "enabled": true, "type": "income" }
     }
   },
-  "Costos y gastos": {
+  "Costos y Gastos": {
     "Costos de Servicios": {
       "5.1.01": {
         "name": "Costo de Desarrollo de Software",
@@ -136,22 +108,19 @@
         "type": "expense"
       },
       "5.1.02": {
-        "name": "Subcontratación de Servicios Técnicos",
+        "name": "Costo de Mano de Obra Real",
         "enabled": true,
         "type": "expense"
       },
-      "5.1.03": {
-        "name": "Licencias de Terceros Usadas en Proyectos",
-        "enabled": true,
-        "type": "expense"
-      },
+      "5.1.03": { "name": "CIF Reales", "enabled": true, "type": "expense" },
       "5.1.04": {
-        "name": "Salarios de Desarrollo Reales",
+        "name": "Costo de Mano de Obra Estimada",
         "enabled": true,
         "type": "expense"
       },
-      "5.1.05": {
-        "name": "Costos Indirectos de Fabricación Reales",
+      "5.1.05": { "name": "CIF Estimados", "enabled": true, "type": "expense" },
+      "5.1.06": {
+        "name": "Variación de Costos de Proyecto",
         "enabled": true,
         "type": "expense"
       }
@@ -160,50 +129,26 @@
       "5.2.01": { "name": "Salarios", "enabled": true, "type": "expense" },
       "5.2.02": { "name": "Vacaciones", "enabled": true, "type": "expense" },
       "5.2.03": { "name": "Aguinaldos", "enabled": true, "type": "expense" },
-      "5.2.04": {
-        "name": "Seguridad Social (ISSS)",
-        "enabled": true,
-        "type": "expense"
-      },
+      "5.2.04": { "name": "Seguro Social", "enabled": true, "type": "expense" },
       "5.2.05": {
-        "name": "Fondo de Pensiones (AFP)",
-        "enabled": true,
-        "type": "expense"
-      },
-      "5.2.06": {
-        "name": "Honorarios Profesionales",
-        "enabled": true,
-        "type": "expense"
-      },
-      "5.2.07": {
-        "name": "Gastos de Capacitación y Formación",
-        "enabled": true,
-        "type": "expense"
-      },
-      "5.2.08": {
-        "name": "Papelería y Útiles de Oficina",
+        "name": "Fondo de Pensiones",
         "enabled": true,
         "type": "expense"
       }
     },
     "Gastos de Mantenimiento": {
       "5.3.01": {
-        "name": "Mantenimiento de Equipo de Oficina",
+        "name": "Mantenimiento de Equipo",
         "enabled": true,
         "type": "expense"
       },
       "5.3.02": {
-        "name": "Mantenimiento de Equipos de Cómputo",
-        "enabled": true,
-        "type": "expense"
-      },
-      "5.3.03": {
-        "name": "Otros Gastos por Mantenimiento",
+        "name": "Otros Gastos de Mantenimiento",
         "enabled": true,
         "type": "expense"
       }
     },
-    "Gastos por Servicios Públicos y Privados": {
+    "Gastos por Servicios Públicos": {
       "5.4.01": {
         "name": "Servicio de Agua",
         "enabled": true,
@@ -220,34 +165,12 @@
         "type": "expense"
       },
       "5.4.04": {
-        "name": "Servicio de Internet/Cable",
+        "name": "Servicio de Internet",
         "enabled": true,
         "type": "expense"
       },
       "5.4.05": {
-        "name": "Servicios en la Nube (Hosting, API, etc.)",
-        "enabled": true,
-        "type": "expense"
-      },
-      "5.4.06": {
-        "name": "Servicio de Vigilancia",
-        "enabled": true,
-        "type": "expense"
-      },
-      "5.4.07": {
         "name": "Publicidad y Promoción",
-        "enabled": true,
-        "type": "expense"
-      }
-    },
-    "Gastos Financieros y Amortización": {
-      "5.5.01": {
-        "name": "Intereses Bancarios",
-        "enabled": true,
-        "type": "expense"
-      },
-      "5.5.02": {
-        "name": "Depreciación y Amortización",
         "enabled": true,
         "type": "expense"
       }
